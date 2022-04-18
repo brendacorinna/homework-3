@@ -3,6 +3,8 @@ import './App.css';
 import { render } from '@testing-library/react';
 import { useState, useEffect } from 'react';
 import CreatePlaylist from './components/createPlaylist';
+import { useSelector } from 'react-redux';
+
 const CLIENT_ID = "64df437743794f03b6582c3afeb0cec6"
 const REDIRECT_URI = "http://localhost:3000/"
 const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
@@ -15,6 +17,8 @@ const App = () => {
   const [selectedSong, setSelectedSong] = useState([]);
   const [accessToken, setAccessToken] = useState("")
   const [data, setData] = useState([])
+  const userToken = useSelector(state => state)
+    console.log(userToken)
 
   const handleChange = (event) => {
     setSearch(event.target.value)
@@ -50,7 +54,7 @@ const App = () => {
     <div className="App">
       <CreatePlaylist accessToken={accessToken} selected={selectedSong}/>
       <header className="Apps-Header">
-        <h1>Cille</h1>
+        <h1>Qillin</h1>
         <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}&scope=${scopes}`}>Login to Spotify</a>
         <input value={search} onChange={handleChange}></input>
         <button onClick={getSpotify}>search</button>
